@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { IBaseComponent } from 'interfaces/base-component.interface'
-import Alert from 'components/alert'
+import Alert from 'components/alerts/alert'
 import { useAlertsProvider } from 'hooks/use-alerts-provider'
 import { AnimatePresence, motion } from "framer-motion";
 

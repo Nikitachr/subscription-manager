@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import LoginForm from 'pages/auth/components/login-form'
+import LoginForm from 'components/forms/login-form'
 import { ILogin } from 'interfaces/login.interface'
 import { useActions } from 'hooks/use-actions'
 import { IBaseComponent } from 'interfaces/base-component.interface'

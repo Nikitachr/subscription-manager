@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Form, FormikProps, withFormik } from 'formik'
 import { IRegister } from 'interfaces/register.interface'
 import SignupSchema from 'utils/validation-schemas/signup.schema'
-import FormField from 'pages/auth/components/form-field'
+import FormField from 'components/forms/form-field'
 
 export interface IRegisterFormProps {
   onRegister: (registerData: IRegister) => void;

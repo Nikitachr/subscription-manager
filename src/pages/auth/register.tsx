@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { RegisterForm } from 'pages/auth/components/register-form'
+import { RegisterForm } from 'components/forms/register-form'
 import { Link } from "react-router-dom";
 import { useActions } from 'hooks/use-actions'
 import { IRegister } from 'interfaces/register.interface'

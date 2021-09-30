@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Form, FormikProps, withFormik } from 'formik'
-import FormField from 'pages/auth/components/form-field'
+import FormField from 'components/forms/form-field'
 import LoginSchema from 'utils/validation-schemas/login.schema'
 import { ILogin } from 'interfaces/login.interface'
 

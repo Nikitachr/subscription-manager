@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useState } from 'react'
 
-export const useFocus = (ref: RefObject<HTMLInputElement> | null): boolean => {
+  export const useFocus = (ref: RefObject<HTMLInputElement> | null): boolean => {
   const [state, setState] = useState(false)
 
   useEffect(() => {

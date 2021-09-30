@@ -5,8 +5,8 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { store } from 'store'
 import { Provider } from 'react-redux'
-import Portal from 'components/portal'
-import Alerts from 'components/alerts'
+import Portal from 'components/alerts/portal'
+import Alerts from 'components/alerts/alerts'
 import alertService from 'services/alerts.service'
 
 ReactDOM.render(
