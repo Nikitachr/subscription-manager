@@ -3,7 +3,6 @@ import { IAlert } from 'interfaces/alert.interface'
 import { v4 as uuidv4 } from 'uuid';
 
 class AlertsService {
-
   private alerts$$ = new Subject<IAlert>();
 
   public getAlerts(): Observable<IAlert> {

@@ -1,7 +1,7 @@
 export interface ISubscription {
   service: string;
-  price: number;
-  paymentDay: number;
+  price: number | string;
+  paymentDay: number | string;
   color: string;
   uid: string;
 }

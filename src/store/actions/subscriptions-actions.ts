@@ -31,7 +31,7 @@ interface LoadDataErrorAction {
 
 interface AddSubscriptionAction {
   type: SubscriptionsActionTypes.ADD_SUBSCRIPTION;
-  payload: Omit<ISubscription, 'uid'>;
+  payload: ISubscription;
 }
 
 interface DeleteSubscriptionAction {

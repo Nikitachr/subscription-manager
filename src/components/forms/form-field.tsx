@@ -1,6 +1,6 @@
-import { FC, useRef } from 'react'
+import { FC } from 'react'
 import { useField } from 'formik'
-import { useFocus } from 'hooks/use-focus'
+
 import { IBaseComponent } from 'interfaces/base-component.interface'
 
 interface IFormFieldProps {
@@ -15,17 +15,12 @@ const FormField: FC<IBaseComponent & IFormFieldProps> = ({
                                           ...props
                                         }) => {
   const [field, meta] = useField(props)
-  const ref = useRef<HTMLInputElement>(null)
-  const focus = useFocus(ref)
   return (
     <div className={`${className} grid gap-y-1`}>
-      <label {...props}
-             className='text-text-second'>{label}</label>
-      <input ref={ref} {...props} {...field}
-             className={`bg-transparent rounded-md border outline-none px-2 py-1 
-             ${focus ? 'border-primary' : ''}
+      {label ? <label {...props} className='text-text-second'>{label}</label> : null}
+      <input {...props} {...field}
+             className={`bg-transparent focus:border-primary rounded-md w-full border outline-none px-2 py-1 'border-white-line' 
              ${(meta.touched && meta.error) ? 'border-error' : ''}
-             ${!focus && !(meta.touched && meta.error) ? 'border-white-line' : ''}
              `} />
       {meta.touched && meta.error ? (
         <div className='text-error'>{meta.error}</div>

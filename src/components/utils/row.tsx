@@ -15,16 +15,16 @@ const Row: FC<IBaseComponent & Partial<IRow>> = ({ className = '', ...props }) =
       <div className="w-1/12 flex">
         {props.firstCol}
       </div>
-      <div className="w-4/12 flex">
+      <div className="w-3/12 lg:w-4/12 flex">
         {props.secondCol}
       </div>
-      <div className="w-2/12 flex justify-center">
+      <div className="w-3/12 lg:w-2/12 flex justify-center">
         {props.thirdCol}
       </div>
-      <div className="w-4/12 flex justify-end">
+      <div className="w-3/12 lg:w-4/12 flex justify-end">
         {props.fourthCol}
       </div>
-      <div className="w-1/12 flex justify-end">
+      <div className="w-2/12 lg:w-1/12 flex justify-end">
         {props.fifthCol}
       </div>
     </div>
