@@ -20,7 +20,7 @@ const Subscription: FC<IBaseComponent & ISubscriptionProps> = ({ className = '',
     <>
       <ContextMenuTrigger id={`${subscription.uid}menu`}>
         <div ref={hoverRef} className={
-          `${className} ${isHover ? 'bg-white' : ''} p-4 rounded-2xl duration-200 cursor-pointer`
+          `${className} ${isHover ? 'bg-white dark:bg-black' : ''} p-4 rounded-2xl duration-200 cursor-pointer`
         }>
           <Row
             firstCol={
@@ -28,17 +28,17 @@ const Subscription: FC<IBaseComponent & ISubscriptionProps> = ({ className = '',
                 <span style={{color: subscription.color}} className="font-bold text-lg">{subscription.service[0]}</span>
               </div>
             }
-            secondCol={<span className="lg:text-lg truncate">{subscription.service}</span>}
-            thirdCol={<span className="lg:text-lg text-main font-bold">{`$ ${subscription.price}`}</span>}
-            fourthCol={<span className="lg:text-main text-lg">{`${subscription.paymentDay}th`}</span>}
+            secondCol={<span className="lg:text-lg truncate text-main dark:text-white transition duration-500">{subscription.service}</span>}
+            thirdCol={<span className="lg:text-lg text-main font-bold dark:text-white transition duration-500">{`$ ${subscription.price}`}</span>}
+            fourthCol={<span className="lg:text-main text-main text-lg dark:text-white transition duration-500">{`${subscription.paymentDay}th`}</span>}
             fifthCol={
               isHover ?
                 (<div className="flex gap-5">
                   <button>
-                    <EditIco/>
+                    <EditIco className="fill-current text-text-second hover:text-text dark:text-white-line dark:hover:text-white transition duration-300"/>
                   </button>
                   <button onClick={() => onDeleteSubscription(subscription.uid)}>
-                    <DeleteIco/>
+                    <DeleteIco className="fill-current text-text-second hover:text-text dark:text-white-line dark:hover:text-white transition duration-300"/>
                   </button>
                 </div>) : <></>
             }

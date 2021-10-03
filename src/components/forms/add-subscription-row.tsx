@@ -27,8 +27,8 @@ const AddSubscriptionRowUI: FC<IBaseComponent & IAddSubscriptionProps> = ({ clas
           fourthCol={<div><FormField className='w-full px-1' name={'paymentDay'} /></div>}
           fifthCol={
             <div className="flex items-center gap-2">
-              <button type='submit'><AcceptIco className="fill-current text-text-main hover:text-green-400 transition duration-200"/></button>
-              <button onClick={onCloseClick} type='button'><CancelIco className="fill-current text-text-main hover:text-red-500 transition duration-200"/></button>
+              <button type='submit'><AcceptIco className="fill-current text-text-main dark:text-white dark:hover:text-green-400 hover:text-green-400 transition duration-200"/></button>
+              <button onClick={onCloseClick} type='button'><CancelIco className="fill-current text-text-main dark:text-white dark:hover:text-red-500 hover:text-red-500 transition duration-200"/></button>
             </div>
           }
         />

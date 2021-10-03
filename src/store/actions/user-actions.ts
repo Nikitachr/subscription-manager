@@ -12,7 +12,8 @@ export enum UserActionTypes {
   REGISTER = 'REGISTER',
   REGISTER_ERROR = 'REGISTER_ERROR',
   SET_USER_DATA = 'SET_USER_DATA',
-  LOAD_USER_DATA = 'LOAD_USER_DATA'
+  LOAD_USER_DATA = 'LOAD_USER_DATA',
+  SET_USER_PROFIT = 'SET_USER_PROFIT'
 }
 
 interface LoginUserAction {
@@ -22,6 +23,11 @@ interface LoginUserAction {
 interface SetUserDataAction {
   type: UserActionTypes.SET_USER_DATA;
   payload: IUser | null;
+}
+
+interface SetUserProfitAction {
+  type: UserActionTypes.SET_USER_PROFIT;
+  payload: number;
 }
 
 interface LoadUserDataAction {
@@ -44,6 +50,7 @@ interface RegisterUserErrorAction {
 
 export type UserAction =
   SetUserDataAction
+  | SetUserProfitAction
   | LoginUserAction
   | LoadUserDataAction
   | LoginUserErrorAction

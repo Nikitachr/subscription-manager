@@ -3,6 +3,7 @@ import { auth, db } from 'services/firebaseSetup'
 import firebase from 'firebase/compat'
 import { IUser } from 'interfaces/user.interface'
 import { ILogin } from 'interfaces/login.interface'
+import { ISubscription } from 'interfaces/subscription.interface';
 
 async function createUser(password: string, email: string): Promise<firebase.User> {
   try {
@@ -34,9 +35,10 @@ export async function registerUser({ username, password, email }: IRegister): Pr
     await db.collection('users').doc(uid).set({
       uid: uid,
       username: username,
+      profit: 0
     })
     await db.collection('subscriptions').doc(uid).set([])
-    return { username, uid }
+    return { username, uid, profit: 0 }
   } catch (e) {
     throw 'User already exist'
   }
@@ -54,6 +56,24 @@ export async function loginUser({ email, password }: ILogin): Promise<IUser> {
     throw 'Invalid email or password'
   }
 }
+
+export async function addSubscription(subscription: ISubscription): Promise<any> {
+  try {
+    const uid = localStorage.getItem('uid');
+    if (!uid) {
+      return null;
+    }
+    await db.collection('subscriptions').doc(uid).update({
+      array: firebase.firestore.FieldValue.arrayUnion(subscription)
+    })
+  } catch (e) {
+    throw 'Cant add subscription';
+  }
+}
+
+// export async function getUserSubscriptions(): Promise<ISubscription[]> {
+//
+// }
 
 export async function isLoginUser(): Promise<IUser | null> {
   try {

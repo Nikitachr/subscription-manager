@@ -12,12 +12,10 @@ import alertService from 'services/alerts.service'
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-
       <App />
       <Portal id="alerts">
         <Alerts className="fixed"/>
       </Portal>
-
     </Provider>
     <div id='alerts' className="fixed top-0 right-0"/>
   </React.StrictMode>,

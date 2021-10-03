@@ -3,6 +3,7 @@ import {
   UserAction,
   UserActionTypes,
 } from 'store/actions/user-actions'
+import { IUser } from 'interfaces/user.interface';
 
 const initialState: IUserState = {
   user: null,
@@ -24,6 +25,8 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
       return { user: null, loading: false, error: action.payload };
     case UserActionTypes.LOAD_USER_DATA:
       return { user: null, loading: true, error: null };
+    case UserActionTypes.SET_USER_PROFIT:
+      return { ...state, user: { ...state.user, profit: action.payload } as IUser }
     default: return state;
   }
 }

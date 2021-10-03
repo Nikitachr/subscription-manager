@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IBaseComponent } from 'interfaces/base-component.interface';
 import { AddSubscriptionRow } from 'components/forms/add-subscription-row';
-import Subscription from 'components/subscription';
+import Subscription from 'components/left-side/subscription';
 import { ISubscription } from 'interfaces/subscription.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
