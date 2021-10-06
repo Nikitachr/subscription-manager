@@ -18,6 +18,7 @@ ReactDOM.render(
       </Portal>
     </Provider>
     <div id='alerts' className="fixed top-0 right-0"/>
+
   </React.StrictMode>,
   document.getElementById('root'),
 )

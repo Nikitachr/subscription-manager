@@ -19,12 +19,14 @@ const mockSubscription: ISubscription = {
 interface ITableProps {
   isAddSubscription?: boolean;
   onCloseAddSubscription: () => void;
+  onEditSubscription: (value: ISubscription) => void;
 }
 
 const Table: FC<IBaseComponent & ITableProps> = ({
                                                    className = '',
                                                    isAddSubscription = false,
                                                    onCloseAddSubscription,
+                                                   onEditSubscription,
                                                  }) => {
   const { subscriptions } = useTypedSelector(state => state.subscriptions);
   const { addSubscriptionAction, deleteSubscriptionAction } = useActions();
@@ -34,30 +36,30 @@ const Table: FC<IBaseComponent & ITableProps> = ({
     addSubscriptionAction(value);
   };
 
-  const handleDeleteSubscription = (id: string): void => {
-    deleteSubscriptionAction(id);
-  }
+  const handleDeleteSubscription = (subscription: ISubscription): void => {
+    deleteSubscriptionAction(subscription);
+  };
 
   return (
     <div className={`${className} `}>
-        <AnimatePresence>
-          {isAddSubscription &&
-          <motion.div layout key={'add'} initial={{ opacity: 0, y: -80 }}
+      <AnimatePresence>
+        {isAddSubscription &&
+        <motion.div layout key={'add'} initial={{ opacity: 0, y: -80 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -80 }}
+        >
+          <AddSubscriptionRow onAddSubscription={handleAddSubscription} onCloseClick={onCloseAddSubscription} />
+        </motion.div>}
+        {subscriptions.map(subscription => (
+          <motion.div key={subscription.uid} layout
+                      initial={{ opacity: 0, y: -80 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -80 }}
-          >
-            <AddSubscriptionRow onAddSubscription={handleAddSubscription} onCloseClick={onCloseAddSubscription} />
-          </motion.div>}
-          {subscriptions.map(subscription => (
-            <motion.div key={subscription.uid} layout
-                        initial={{ opacity: 0, y: -80 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -80 }}>
-              <Subscription onDeleteSubscription={handleDeleteSubscription} subscription={subscription} />
-            </motion.div>
-          ))}
+                      exit={{ opacity: 0, y: -80 }}>
+            <Subscription onEditSubscription={onEditSubscription} onDeleteSubscription={handleDeleteSubscription} subscription={subscription} />
+          </motion.div>
+        ))}
 
-        </AnimatePresence>
+      </AnimatePresence>
     </div>
   );
 };

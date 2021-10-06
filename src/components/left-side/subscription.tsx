@@ -9,10 +9,11 @@ import useHover from 'hooks/use-hover';
 
 export interface ISubscriptionProps {
   subscription: ISubscription;
-  onDeleteSubscription: (id: string) => void;
+  onDeleteSubscription: (subscription: ISubscription) => void;
+  onEditSubscription: (value: ISubscription) => void;
 }
 
-const Subscription: FC<IBaseComponent & ISubscriptionProps> = ({ className = '', subscription, onDeleteSubscription }) => {
+const Subscription: FC<IBaseComponent & ISubscriptionProps> = ({ className = '', subscription, onDeleteSubscription, onEditSubscription }) => {
   const hoverRef = useRef(null)
   const isHover = useHover(hoverRef)
 
@@ -34,10 +35,10 @@ const Subscription: FC<IBaseComponent & ISubscriptionProps> = ({ className = '',
             fifthCol={
               isHover ?
                 (<div className="flex gap-5">
-                  <button>
+                  <button onClick={() => onEditSubscription(subscription)}>
                     <EditIco className="fill-current text-text-second hover:text-text dark:text-white-line dark:hover:text-white transition duration-300"/>
                   </button>
-                  <button onClick={() => onDeleteSubscription(subscription.uid)}>
+                  <button onClick={() => onDeleteSubscription(subscription)}>
                     <DeleteIco className="fill-current text-text-second hover:text-text dark:text-white-line dark:hover:text-white transition duration-300"/>
                   </button>
                 </div>) : <></>
@@ -51,7 +52,7 @@ const Subscription: FC<IBaseComponent & ISubscriptionProps> = ({ className = '',
             <EditIco/>
             <span>Edit</span>
           </MenuItem>
-          <MenuItem onClick={() => onDeleteSubscription(subscription.uid)} className="hover:bg-white-line px-2 py-1 rounded cursor-pointer flex items-center gap-2">
+          <MenuItem onClick={() => onDeleteSubscription(subscription)} className="hover:bg-white-line px-2 py-1 rounded cursor-pointer flex items-center gap-2">
             <DeleteIco/>
             <span className="ml-1">Delete</span>
           </MenuItem>

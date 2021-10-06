@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { currencyRegExp } from 'utils/regexp/currency-regex';
 
 export const useNumberInput = (
   initialValue: number | string,
@@ -8,7 +9,7 @@ export const useNumberInput = (
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const newValue = event.target.value;
-    if (newValue.match(/^[0-9]+$|^$/)) {
+    if (newValue.match(currencyRegExp)) {
       setValue(newValue);
     }
   };

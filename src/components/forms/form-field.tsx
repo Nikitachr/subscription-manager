@@ -17,7 +17,7 @@ const FormField: FC<IBaseComponent & IFormFieldProps> = ({
   const [field, meta] = useField(props)
   return (
     <div className={`${className} grid gap-y-1`}>
-      {label ? <label {...props} className='text-text-second'>{label}</label> : null}
+      {label ? <label {...props} className='text-text-second dark:text-white transition duration-500'>{label}</label> : null}
       <input {...props} {...field}
              className={`bg-transparent dark:bg-black-line dark:text-white transition duration-500 focus:border-primary rounded-md w-full border outline-none px-2 py-1 border-white-line' 
              ${(meta.touched && meta.error) ? 'border-error' : ''}

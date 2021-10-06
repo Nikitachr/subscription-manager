@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
 import { SubscriptionsAction, SubscriptionsActionTypes } from 'store/actions/subscriptions-actions';
 import { ISubscription } from 'interfaces/subscription.interface';
-import { addSubscription } from 'services/api';
 import alertsService from 'services/alerts.service';
+import { addSubscription } from 'services/api/subscriptions/add-subscription';
 
 export const addSubscriptionAction = (subscription: ISubscription) => {
   return async (dispatch: Dispatch<SubscriptionsAction>) => {
