@@ -18,7 +18,6 @@ export const subscriptionsReducer = (state: ISubscriptionsState = initialState, 
     case SubscriptionsActionTypes.LOAD_DATA_ERROR:
       return { ...state, loading: false, error: action.payload };
     case SubscriptionsActionTypes.ADD_SUBSCRIPTION:
-      console.log(action.payload);
       return {
         ...state,
         subscriptions: [...state.subscriptions, action.payload]
@@ -27,6 +26,14 @@ export const subscriptionsReducer = (state: ISubscriptionsState = initialState, 
       return {
         ...state,
         subscriptions: state.subscriptions.filter(el => el.uid !== action.payload)
+      };
+    case SubscriptionsActionTypes.EDIT_SUBSCRIPTION:
+      const newSubscriptions = [...state.subscriptions];
+      const index = newSubscriptions.findIndex(el => el.uid === action.payload.uid);
+      newSubscriptions[index] = action.payload;
+      return {
+        ...state,
+        subscriptions: newSubscriptions
       };
     default:
       return state;

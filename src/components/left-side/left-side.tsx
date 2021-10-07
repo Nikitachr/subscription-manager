@@ -7,8 +7,12 @@ import Table from 'components/left-side/table';
 import Portal from 'components/alerts/portal';
 import { EditSubscription } from 'components/forms/edit-subscription';
 import { ISubscription } from 'interfaces/subscription.interface';
+import { useActions } from 'hooks/use-actions';
+
+let prevValue = {};
 
 const LeftSide: FC<IBaseComponent> = ({ className = '' }) => {
+  const { editSubscriptionAction } = useActions()
   const [isAddSubscription, setIsAddSubscription] = useState(false);
   const [editSubscription, setEditSubscription] = useState<ISubscription | null>(null);
 
@@ -17,6 +21,7 @@ const LeftSide: FC<IBaseComponent> = ({ className = '' }) => {
   };
 
   const openEditSubscription = (value: ISubscription): void => {
+    prevValue = value;
     setEditSubscription(value);
   }
 
@@ -29,7 +34,7 @@ const LeftSide: FC<IBaseComponent> = ({ className = '' }) => {
   };
 
   const handleSubmitEditSubscription = (value: ISubscription): void => {
-    console.log(value);
+    editSubscriptionAction(prevValue, value);
     setEditSubscription(null);
   }
 

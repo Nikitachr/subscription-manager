@@ -5,6 +5,7 @@ import { deleteSubscriptionAction } from 'store/action-creators/subscriptions-ac
 import { addSubscriptionAction } from 'store/action-creators/subscriptions-actions/add-subscription.action';
 import { updateUserProfitAction } from 'store/action-creators/user-actions/update-user-profit.action';
 import { loadSubscriptionsAction } from 'store/action-creators/subscriptions-actions/load-subscriptions.action';
+import { editSubscriptionAction } from 'store/action-creators/subscriptions-actions/edit-subscription.action';
 
 export default {
   loginUserAction,
@@ -13,5 +14,6 @@ export default {
   deleteSubscriptionAction,
   addSubscriptionAction,
   updateUserProfitAction,
-  loadSubscriptionsAction
+  loadSubscriptionsAction,
+  editSubscriptionAction
 }
