@@ -16,8 +16,8 @@ const SubscriptionsTotal: FC<IBaseComponent> = ({ className = '' }) => {
   return (
     <div className={`${className} flex flex-col items-center gap-3`}>
       <h3 className="font-bold text-lg">Subscriptions</h3>
-      <p className="font-bold text-4xl">{total}</p>
-      <p>USE/month</p>
+      <p className="font-bold text-4xl">{total.toFixed(2)}</p>
+      <p>USD/month</p>
     </div>
   );
 };

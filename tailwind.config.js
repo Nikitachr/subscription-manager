@@ -16,6 +16,7 @@ module.exports = {
         'text': '#1B1B1B',
         'text-second': '#62687F',
         'text-main': '#2E3554',
+        'chart-line': '#FFA548',
         error: '#F03738',
       },
       flexGrow: {
@@ -33,6 +34,7 @@ module.exports = {
       boxShadow: ['dark']
     },
     fill: ['hover', 'focus'],
+    opacity: ['dark']
   },
   plugins: [],
 };
