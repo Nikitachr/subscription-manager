@@ -19,7 +19,7 @@ const arcTween = (newAngle: number, arcGenerator: d3.Arc<any, any>): any => (d: 
 
 const tau = 2 * Math.PI;
 
-const formatNumber = format(",d");
+const formatNumber = format(',d');
 
 const PieChart: FC<IBaseComponent & IPieChartProps> = ({
                                                          className = '',
@@ -35,10 +35,10 @@ const PieChart: FC<IBaseComponent & IPieChartProps> = ({
 
   const textStyle: any = {
     position: 'absolute',
-    left: `${width * 0.4}px`,
-    top: `${width * 0.5}px`,
+    left: `${width * 0.3}px`,
+    top: `${width * 0.3}px`,
     fontSize: '32px',
-  }
+  };
 
   const arcGenerator = arc()
     .innerRadius(arcInnerRadius)
@@ -64,20 +64,33 @@ const PieChart: FC<IBaseComponent & IPieChartProps> = ({
     transitionBar();
   };
 
-  const renderText = (): void => {
+
+  function renderText(): void {
     const node = textRef.current;
-    const t: any = transition().duration(800);
+    const tr: any = transition().duration(800);
 
-
+    select(node)
+      .transition(tr)
+      .tween('text', function() {
+        const that = select(this);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const i = interpolateNumber(that.text().replace(/,/g, ''), value);
+        return function(t) {
+          that.text(formatNumber(i(t)));
+        };
+      });
   }
+
 
   useEffect(() => {
     initBar();
-  }, []);
+    renderText();
+  }, [value]);
 
   return (
-    <div className={`${className} `}>
-      <svg width={width} height={width}>
+    <div className={`${className} relative`}>
+      <svg className="relative" width={width} height={width}>
         <g className='background-bar-group' transform={`translate(${width / 2}, ${width / 2})`}>
           <path className='fill-current dark:opacity-80 opacity-10 text-white-line dark:text-white '
                 d={arcGenerator({
@@ -86,7 +99,7 @@ const PieChart: FC<IBaseComponent & IPieChartProps> = ({
                   outerRadius: arcOuterRadius,
                   startAngle: 0,
                 }) as string}
-                 />
+          />
         </g>
         <g
           ref={ref}
@@ -94,9 +107,12 @@ const PieChart: FC<IBaseComponent & IPieChartProps> = ({
           transform={`translate(${width / 2}, ${width / 2})`}
         />
       </svg>
-      <div style={textStyle}>
-        <span ref={textRef}>0</span>
-        <span>%</span>
+      <div className="flex flex-col items-center" style={textStyle}>
+        <div>
+          <span ref={textRef}>0</span>
+          <span>%</span>
+        </div>
+        <p className="text-base">of income</p>
       </div>
     </div>
   );
