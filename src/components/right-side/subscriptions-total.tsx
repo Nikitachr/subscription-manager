@@ -8,7 +8,7 @@ const SubscriptionsTotal: FC<IBaseComponent> = ({ className = '' }) => {
   const [total, setTotal] = useState<number>(0);
 
   useEffect(() => {
-    if (subscriptions.length) {
+    if (subscriptions?.length) {
       setTotal(+subscriptions.map(el => el.price).reduce((acc, el) => +acc + +el));
     }
   }, [subscriptions])

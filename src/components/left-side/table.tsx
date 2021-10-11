@@ -50,7 +50,7 @@ const Table: FC<IBaseComponent & ITableProps> = ({
         >
           <AddSubscriptionRow onAddSubscription={handleAddSubscription} onCloseClick={onCloseAddSubscription} />
         </motion.div>}
-        {subscriptions.map(subscription => (
+        {subscriptions?.map(subscription => (
           <motion.div key={subscription.uid} layout
                       initial={{ opacity: 0, y: -80 }}
                       animate={{ opacity: 1, y: 0 }}

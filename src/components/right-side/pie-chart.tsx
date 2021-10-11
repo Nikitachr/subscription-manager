@@ -28,11 +28,12 @@ const PieChart: FC<IBaseComponent & IPieChartProps> = ({
                                                          lineWidth = 12,
                                                        }) => {
   const ref = useRef(null);
+  const textRef = useRef(null);
   const arcOuterRadius = width / 2;
   const arcInnerRadius = width / 2 - lineWidth;
   let g: d3.Selection<any, any, any, any>;
 
-  const textStyle = {
+  const textStyle: any = {
     position: 'absolute',
     left: `${width * 0.4}px`,
     top: `${width * 0.5}px`,
@@ -63,6 +64,13 @@ const PieChart: FC<IBaseComponent & IPieChartProps> = ({
     transitionBar();
   };
 
+  const renderText = (): void => {
+    const node = textRef.current;
+    const t: any = transition().duration(800);
+
+
+  }
+
   useEffect(() => {
     initBar();
   }, []);
@@ -86,7 +94,10 @@ const PieChart: FC<IBaseComponent & IPieChartProps> = ({
           transform={`translate(${width / 2}, ${width / 2})`}
         />
       </svg>
-
+      <div style={textStyle}>
+        <span ref={textRef}>0</span>
+        <span>%</span>
+      </div>
     </div>
   );
 };

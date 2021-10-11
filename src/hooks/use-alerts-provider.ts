@@ -21,7 +21,7 @@ export const useAlertsProvider = (): [IAlert[], (id: string) => void] => {
   }
 
   useEffect(() => {
-    const alerts$ = onEmit<IAlert>(alertsService.getAlerts(), handleAddAlert);
+    const alerts$ = onEmit<IAlert>(alertsService.getAlerts().pipe(tap(res => console.log(res))), handleAddAlert);
     return () => alerts$.unsubscribe();
   }, [])
 

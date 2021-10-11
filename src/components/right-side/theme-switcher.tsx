@@ -16,7 +16,7 @@ const ThemeSwitcher: FC<IBaseComponent> = ({ className = '' }) => {
   return (
     <div className={`${className} `}>
 
-      <button onClick={handleButtonClick} className="w-12 h-12 flex items-center justify-center hover:shadow-dark dark:hover:shadow-light rounded-full transition duration-300 fill-current dark:text-white text-text-main">
+      <button onClick={handleButtonClick} className="w-12 h-12 outline-none flex items-center justify-center hover:shadow-dark dark:hover:shadow-light rounded-full transition duration-300 fill-current dark:text-white text-text-main">
           {theme === 'light' ? <SunIcon/> : <MoonIcon/>}
       </button>
     </div>

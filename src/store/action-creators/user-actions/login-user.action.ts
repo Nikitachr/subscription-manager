@@ -4,6 +4,7 @@ import { ILogin } from 'interfaces/login.interface'
 import { UserAction, UserActionTypes } from 'store/actions/user-actions'
 import { history } from 'App'
 import loginUser from 'services/api/user/login-user';
+import alertsService from 'services/alerts.service';
 
 export const loginUserAction = (value: ILogin) => {
   return async (dispatch: Dispatch<UserAction>) => {
@@ -15,6 +16,7 @@ export const loginUserAction = (value: ILogin) => {
       history.push('/main')
     } catch (e)  {
       dispatch({ type: UserActionTypes.LOGIN_ERROR, payload: e as string })
+      alertsService.onError(e as string, 5000)
     }
   }
 }
