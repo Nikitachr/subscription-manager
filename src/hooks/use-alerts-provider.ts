@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from 'react'
-import { Observable, Subscription, tap } from 'rxjs'
+import { useEffect, useState } from 'react'
+import { Observable, Subscription } from 'rxjs'
 
 import { IAlert } from 'interfaces/alert.interface'
-import { useTypedSelector } from 'hooks/use-typed-selector'
 import alertsService from 'services/alerts.service'
 
 function onEmit<T>(source$:Observable<T>, nextFn:(value: T) => void): Subscription {
@@ -21,7 +20,7 @@ export const useAlertsProvider = (): [IAlert[], (id: string) => void] => {
   }
 
   useEffect(() => {
-    const alerts$ = onEmit<IAlert>(alertsService.getAlerts().pipe(tap(res => console.log(res))), handleAddAlert);
+    const alerts$ = onEmit<IAlert>(alertsService.getAlerts(), handleAddAlert);
     return () => alerts$.unsubscribe();
   }, [])
 

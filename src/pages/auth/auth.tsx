@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react'
+import { FC, useEffect, useRef } from 'react';
 import { Switch, Route, useRouteMatch, useLocation } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
@@ -6,10 +6,16 @@ import right from '../../assets/imgs/Right.png'
 import Register from 'pages/auth/register'
 import Login from 'pages/auth/login'
 import { IBaseComponent } from 'interfaces/base-component.interface'
+import useTheme from 'hooks/use-theme';
 
 const Auth: FC<IBaseComponent> = ({ className = '' }) => {
+  const [ theme, setTheme ] = useTheme();
   const { path, url } = useRouteMatch()
   const location = useLocation()
+
+  useEffect(() => {
+    setTheme('light');
+  }, [])
 
   return (
     <div className={`${className} w-screen h-screen bg-white-bg flex`}>

@@ -5,21 +5,29 @@ import { useTypedSelector } from 'hooks/use-typed-selector';
 import ThemeSwitcher from 'components/right-side/theme-switcher';
 import YourProfit from 'components/right-side/your-profit';
 import { useActions } from 'hooks/use-actions';
+import { ReactComponent as LogoutIco } from 'assets/icons/logout.svg';
+import useTheme, { TTheme } from 'hooks/use-theme';
 
 const UserInfo: FC<IBaseComponent> = ({ className = '' }) => {
   const { user } = useTypedSelector(state => state.user)
-  const { updateUserProfitAction } = useActions();
+  const { updateUserProfitAction, logoutUserAction } = useActions();
 
   const handleEditUserProfit = (value: number): void => {
     updateUserProfitAction(value);
   }
 
+  const handleLogout = (): void => {
+    logoutUserAction();
+  }
+
   return (
     <div className={`${className} `}>
       <div className="flex items-center justify-between mb-20">
-        <div className="flex items-center gap-4">
-          <div className='w-14 h-14 rounded-full bg-green-500'/>
-          <span className="text-text-main text-lg dark:text-white font-bold transition duration-500">{user?.username}</span>
+        <div className="flex pl-2 items-center gap-3 dark:text-white text-text-main transition duration-500">
+          <span className="text-lg font-bold">{user?.username}</span>
+          <button onClick={handleLogout}>
+            <LogoutIco className="fill-current h-5 cursor-pointer"/>
+          </button>
         </div>
         <ThemeSwitcher/>
       </div>

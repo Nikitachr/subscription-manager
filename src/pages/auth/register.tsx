@@ -9,7 +9,6 @@ const Register: FC<IBaseComponent> = ({ className = '' }) => {
   const { registerUserAction } = useActions()
 
   const handleRegister = (value: IRegister): void => {
-    console.log(value);
     registerUserAction(value);
   }
 

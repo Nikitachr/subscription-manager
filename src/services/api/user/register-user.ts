@@ -11,9 +11,10 @@ export default async function registerUser({ username, password, email }: IRegis
       username: username,
       profit: 0
     })
-    await db.collection('subscriptions').doc(uid).set([])
+    await db.collection('subscriptions').doc(uid).set({ array: [] })
     return { username, uid, profit: 0 }
   } catch (e) {
+    console.log(e);
     throw 'User already exist'
   }
 }

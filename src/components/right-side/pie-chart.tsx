@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { IBaseComponent } from 'interfaces/base-component.interface';
 import * as d3 from 'd3';
-import { arc, format, interpolate, interpolateNumber, select, text, transition } from 'd3';
+import { arc, format, interpolate, interpolateNumber, select, text, Transition, transition } from 'd3';
 
 interface IPieChartProps {
   value: number;
@@ -18,8 +18,8 @@ const arcTween = (newAngle: number, arcGenerator: d3.Arc<any, any>): any => (d: 
 };
 
 const tau = 2 * Math.PI;
-
 const formatNumber = format(',d');
+let g: d3.Selection<SVGPathElement, { endAngle: number; }, null, undefined> | null;
 
 const PieChart: FC<IBaseComponent & IPieChartProps> = ({
                                                          className = '',
@@ -31,9 +31,8 @@ const PieChart: FC<IBaseComponent & IPieChartProps> = ({
   const textRef = useRef(null);
   const arcOuterRadius = width / 2;
   const arcInnerRadius = width / 2 - lineWidth;
-  let g: d3.Selection<any, any, any, any>;
 
-  const textStyle: any = {
+  const textStyle: { [key: string]: string } = {
     position: 'absolute',
     left: `${width * 0.3}px`,
     top: `${width * 0.3}px`,
@@ -48,9 +47,11 @@ const PieChart: FC<IBaseComponent & IPieChartProps> = ({
 
   const transitionBar = (): void => {
     const t = transition().duration(800);
-
+    if (!g) {
+      return;
+    }
     g
-      .transition(t as any)
+      .transition(t as Transition<any, any, any, any>)
       .duration(750)
       .attrTween('d', arcTween((value * tau) / 100, arcGenerator));
   };
@@ -64,27 +65,26 @@ const PieChart: FC<IBaseComponent & IPieChartProps> = ({
     transitionBar();
   };
 
-
   function renderText(): void {
     const node = textRef.current;
-    const tr: any = transition().duration(800);
+    const tr = transition().duration(800);
 
     select(node)
-      .transition(tr)
+      .transition(tr as Transition<any, any, any, any>)
       .tween('text', function() {
-        const that = select(this);
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        const i = interpolateNumber(that.text().replace(/,/g, ''), value);
+        const i = interpolateNumber(+select(this).text().replace(/,/g, ''), value);
         return function(t) {
-          that.text(formatNumber(i(t)));
+          +select(this).text(formatNumber(i(t)));
         };
       });
   }
 
+  useEffect(() => {
+    return () => {g = null}
+  }, [])
 
   useEffect(() => {
-    initBar();
+    g ? transitionBar() : initBar();
     renderText();
   }, [value]);
 
@@ -107,7 +107,7 @@ const PieChart: FC<IBaseComponent & IPieChartProps> = ({
           transform={`translate(${width / 2}, ${width / 2})`}
         />
       </svg>
-      <div className="flex flex-col items-center" style={textStyle}>
+      <div className="flex flex-col items-center text-text-main dark:text-white transition duration-500" style={textStyle}>
         <div>
           <span ref={textRef}>0</span>
           <span>%</span>
